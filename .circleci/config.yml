@@ -1,9 +1,12 @@
+defaults: &defaults
+  working_directory: ~/app
+  docker:
+    - image: "circleci/golang:1.11"
+
 version: 2
 jobs:
   build:
-    docker:
-      - image: circleci/golang:1.11
-    working_directory: ~/myapp
+    <<: *defaults
     steps:
       - checkout
       - run:
@@ -18,10 +21,8 @@ jobs:
             go test -v ./...
 
   deploy:
-    docker:
-      - image: circleci/golang:1.11
-    working_directory: /myapp
-    steps:
+    <<: *defaults
+      steps:
       - checkout
       - run: go get -u github.com/mitchellh/gox
       - run: go get -u github.com/tcnksm/ghr
