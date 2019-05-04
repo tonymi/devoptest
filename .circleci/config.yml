@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/golang:1.11
-    working_directory: /myapp
+    working_directory: ~/myapp
     steps:
       - checkout
       - run:
